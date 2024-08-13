@@ -224,9 +224,9 @@ it('can disable images', function () {
 
 it('can disable capture urls', function () {
     $command = Browsershot::url('https://example.com')
-        ->disableCaptureURLS()
-        ->createScreenshotCommand('screenshot.png');
+        ->disableCaptureURLS();
 
+    $this->assertEmpty($command->triggeredRequests());
     $this->assertEquals([
         'url' => 'https://example.com',
         'action' => 'screenshot',
@@ -240,7 +240,7 @@ it('can disable capture urls', function () {
             'args' => [],
             'type' => 'png',
         ],
-    ], $command);
+    ], $command->createScreenshotCommand('screenshot.png'));
 });
 
 it('can block urls', function () {
